@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Talk2Friends</string>
+    <string name="next_page_button">Continue</string>
+    <string name="signup_button">Sign-Up</string>
+    <string name="login_button">Login</string>
+    <string name="friends_page_button">Friends</string>
+    <string name="profile_page_button">Profile</string>
+    <string name="meetings_page_button">Meetings</string>
 </resources>
