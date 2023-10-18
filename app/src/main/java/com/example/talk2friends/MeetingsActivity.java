@@ -11,7 +11,7 @@ public class MeetingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meetings_page);
-
+        Controller c = (Controller) getIntent().getSerializableExtra("controller");
 
 
     }

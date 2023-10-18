@@ -1,5 +1,8 @@
 package com.example.talk2friends;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class User {
@@ -9,6 +12,9 @@ public class User {
     boolean isProficient;
     ArrayList<String> friends;
     ArrayList<String> incomingFriendRequests;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference();
 
     public User(){
     }
@@ -27,6 +33,12 @@ public class User {
         this.bday = bday;
         this.isStudent = isStudent;
         this.isProficient = isProficient;
+        this.friends = new ArrayList<String>();
+        this.incomingFriendRequests = new ArrayList<String>();
+    }
+
+    public User(String name, ArrayList<String> friends, ArrayList<String> incomingFriendRequests) {
+        this.name = name;
         this.friends = new ArrayList<String>();
         this.incomingFriendRequests = new ArrayList<String>();
     }

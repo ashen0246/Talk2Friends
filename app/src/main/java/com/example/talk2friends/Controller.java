@@ -6,8 +6,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Controller {
     //email gotten from auth step can find user data with it
