@@ -1,26 +1,34 @@
 package com.example.talk2friends;
 
+import java.util.ArrayList;
+
 public class User {
-    String email;
     String name;
     String bday;
     boolean isStudent;
     boolean isProficient;
+    ArrayList<String> friends;
+    ArrayList<String> incomingFriendRequests;
 
-    public User(String email, String name, String bday, boolean isStudent, boolean isProficient) {
-        this.email = email;
+    public User(){
+    }
+
+    public User(String name, String bday, boolean isStudent, boolean isProficient, ArrayList<String> friends, ArrayList<String> incomingFriendRequests) {
         this.name = name;
         this.bday = bday;
         this.isStudent = isStudent;
         this.isProficient = isProficient;
+        this.friends = friends;
+        this.incomingFriendRequests = incomingFriendRequests;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public User(String name, String bday, boolean isStudent, boolean isProficient) {
+        this.name = name;
+        this.bday = bday;
+        this.isStudent = isStudent;
+        this.isProficient = isProficient;
+        this.friends = new ArrayList<String>();
+        this.incomingFriendRequests = new ArrayList<String>();
     }
 
     public String getName() {
@@ -43,7 +51,7 @@ public class User {
         return isStudent;
     }
 
-    public void setStudent(boolean student) {
+    public void setIsStudent(boolean student) {
         isStudent = student;
     }
 
@@ -51,7 +59,21 @@ public class User {
         return isProficient;
     }
 
-    public void setProficient(boolean proficient) {
+    public void setIsProficient(boolean proficient) {
         isProficient = proficient;
+    }
+
+    public ArrayList<String> getFriends() {
+        return friends;
+    }
+
+    public void acceptFriend(String email) {
+    }
+
+    public ArrayList<String> getIncomingFriendRequests() {
+        return incomingFriendRequests;
+    }
+
+    public void sendFriendRequest(String email) {
     }
 }

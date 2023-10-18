@@ -7,18 +7,15 @@ public class Meeting {
     String topic;
     String location;
     String time;
-
-    //whether or not the user is currently attending
-    boolean attending;
-
+    boolean isAttending;
     ArrayList<String> attendants;
 
-    public Meeting(String meetingID, String topic, String location, String time, boolean attending, ArrayList<String> attendants){
+    public Meeting(String meetingID, String topic, String location, String time, boolean isAttending, ArrayList<String> attendants){
         this.meetingID = meetingID;
         this.topic = topic;
         this.location = location;
         this.time = time;
-        this.attending = attending;
+        this.isAttending = isAttending;
         this.attendants = attendants;
     }
 
@@ -35,7 +32,7 @@ public class Meeting {
     }
 
     public boolean isAttending() {
-        return attending;
+        return isAttending;
     }
 
     public ArrayList<String> getAttendants() {

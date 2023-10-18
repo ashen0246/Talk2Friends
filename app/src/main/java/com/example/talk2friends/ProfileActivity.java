@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -14,8 +15,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.profile_page);
         //No rotation of screen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-
-
 
     }
 

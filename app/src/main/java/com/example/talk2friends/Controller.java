@@ -1,14 +1,19 @@
 package com.example.talk2friends;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Controller {
     //email gotten from auth step can find user data with it
     String email = "";
+    User user;
+    ArrayList<Meeting> meetings;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
@@ -17,7 +22,7 @@ public class Controller {
         this.email = email;
 
         //test
-        //setProfile("a", "jan", true, true);
+        //createNewUser("b", "jan", true, true);
     }
 
     //for login page
@@ -26,34 +31,40 @@ public class Controller {
         return true;
     }
 
-    //for email verification page
-
-    //for create profile page
-
-    public void setProfile(String name, String bday, boolean isStudent, boolean isProficient){
-        User u = new User(email, name, bday, isStudent, isProficient);
-
-        myRef.child("users").child("testUserId").setValue(u);
-    }
-
     //for verification page
     public boolean isValidCode(String code){
         return true;
     }
 
     //for create user page
-    //affiliation = true = student
-    //proficiency = true = native speaker
-    public void createUser(String name, String bday, Boolean Affiliation, Boolean proficiency){
 
+    public void createNewUser(String name, String bday, boolean isStudent, boolean isProficient){
+        user = new User(name, bday, isStudent, isProficient);
+        myRef.child("users").child(email).setValue(user);
     }
 
     //for profile page
 
-    //returns [name, bday, student, proficient]
-    public String[] getProfileInfo() {
-        return null;
+    public void getUserFromDatabase() {
+        //will auto update as profile gets updated
+        myRef.child("users").child(email).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user = dataSnapshot.getValue(User.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                System.out.println("Failed to read value. " + error);
+            }
+        });
     }
+
+    public User getUser(){
+        return user;
+    }
+
     public void setName(String name){
 
     }

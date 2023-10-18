@@ -10,7 +10,6 @@ import android.widget.Button;
 public class LoginActivity extends AppCompatActivity {
 
     boolean login = true;
-    Controller controller = new Controller("test");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
