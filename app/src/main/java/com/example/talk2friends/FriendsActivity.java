@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 public class FriendsActivity extends AppCompatActivity {
-
+    String email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,16 +15,19 @@ public class FriendsActivity extends AppCompatActivity {
         //No rotation of screen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
+        email = getIntent().getStringExtra("email");
 
 
     }
 
     public void onClickProfilePage(View view) {
         Intent profilePageIntent = new Intent(this, ProfileActivity.class);
+        profilePageIntent.putExtra("email", email);
         startActivity(profilePageIntent);
     }
     public void onClickMeetingsPage(View view) {
         Intent meetingsPageIntent = new Intent(this, MeetingsActivity.class);
+        meetingsPageIntent.putExtra("email", email);
         startActivity(meetingsPageIntent);
     }
 

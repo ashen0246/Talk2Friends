@@ -35,8 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         if (login){
             //login
             Intent mainPageIntent = new Intent(this, MeetingsActivity.class);
-
-            Controller c = new Controller("test");
+            mainPageIntent.putExtra("email", "a");
             startActivity(mainPageIntent);
         }
         else{
