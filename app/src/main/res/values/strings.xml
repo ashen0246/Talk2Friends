@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Talk2Friends</string>
     <string name="next_page_button">Continue</string>
-    <string name="signup_button">Sign-Up</string>
-    <string name="login_button">Login</string>
+    <string name="signup_button">Switch to Sign-Up</string>
+    <string name="login">Login</string>
+    <string name="signup">Sign-Up</string>
+    <string name="verifyEmail">Verify Email</string>
+    <string name="EmailVerified">Email Verified</string>
+    <string name="login_button">Switch to Login</string>
     <string name="friends_page_button">Friends</string>
     <string name="profile_page_button">Profile</string>
     <string name="meetings_page_button">Meetings</string>
+    <string name="inputEmail">USC Email</string>
+    <string name="inputPwd">Password</string>
 </resources>
