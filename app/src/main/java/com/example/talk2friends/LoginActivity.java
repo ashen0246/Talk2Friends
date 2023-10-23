@@ -110,6 +110,11 @@ public class LoginActivity extends AppCompatActivity {
                                                                 TextView s = findViewById(R.id.toggleLoginButton);
                                                                 s.setText(R.string.cancel);
                                                             }
+                                                            else{
+                                                                //apparently it always works
+                                                                //text.setText(R.string.invEmail);
+                                                                //deleteUser();
+                                                            }
                                                         }
                                                     });
                                         } else {
