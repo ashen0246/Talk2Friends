@@ -12,4 +12,11 @@
     <string name="meetings_page_button">Meetings</string>
     <string name="inputEmail">USC Email</string>
     <string name="inputPwd">Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="invEmail">Invalid Email</string>
+    <string name="invPwd">Password must contain at least 6 characters</string>
+    <string name="invLogin">Invalid Login</string>
+    <string name="invNewAccount">Account already exists.</string>
+    <string name="emailSent">Verification Email Sent</string>
+    <string name="emailNotVerified">Email not verified. Please try again in a few seconds.</string>
 </resources>
