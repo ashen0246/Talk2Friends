@@ -6,4 +6,8 @@
     <string name="friends_page_button">Friends</string>
     <string name="profile_page_button">Profile</string>
     <string name="meetings_page_button">Meetings</string>
+    <string name="current_name">Andy Shen</string>
+    <string name="current_bday">1/1/2000</string>
+    <string name="current_aff">Student</string>
+    <string name="current_prof">Native</string>
 </resources>

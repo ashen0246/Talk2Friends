@@ -17,6 +17,14 @@ public class ProfileActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         email = getIntent().getStringExtra("email");
+
+        //use email to update current values in hints on load
+    }
+
+    //when you click the edit button, take all the values entered in each edittext and push them to firebase
+    //don't forget to reload the profile page after, probably using an intent
+    public void onClickEditButton(View view) {
+
     }
 
     public void onClickProfilePage(View view) {
