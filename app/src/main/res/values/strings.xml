@@ -5,7 +5,7 @@
     <string name="login">Login</string>
     <string name="signup">Sign-Up</string>
     <string name="verifyEmail">Verify Email</string>
-    <string name="EmailVerified">Email Verified</string>
+    <string name="emailVerified">Email Verified</string>
     <string name="login_button">Switch to Login</string>
     <string name="friends_page_button">Friends</string>
     <string name="profile_page_button">Profile</string>
@@ -17,6 +17,9 @@
     <string name="invPwd">Password must contain at least 6 characters</string>
     <string name="invLogin">Invalid Login</string>
     <string name="invNewAccount">Account already exists.</string>
+    <string name="sendingEmail">Sending Email...</string>
     <string name="emailSent">Verification Email Sent</string>
+    <string name="plsVerify">Please Verify Email. Email sent.</string>
     <string name="emailNotVerified">Email not verified. Please try again in a few seconds.</string>
+    <string name="loggingIn">Loggin In...</string>
 </resources>

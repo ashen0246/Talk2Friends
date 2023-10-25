@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,10 +43,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickToggleLogin(View view) {
-        if (verifyEmailStep){
-            //delete acct
-            deleteUser();
-        }
         verifyEmailStep = false;
         login = !login;
         Button button = findViewById(R.id.toggleLoginButton);
@@ -69,12 +67,23 @@ public class LoginActivity extends AppCompatActivity {
         if (!verifyEmailStep) {
             if (login) {
                 //login
+                text.setText(R.string.loggingIn);
                 mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    goToMeetingPage();
+                                    if (mAuth.getCurrentUser().isEmailVerified()) {
+                                        goToMeetingPage();
+                                    }
+                                    else{
+                                        //maybe need to send new link
+                                        Button button = findViewById(R.id.nextPageButton);
+                                        button.setText(getString(R.string.emailVerified));
+                                        TextView text = findViewById(R.id.errorMessage);
+                                        text.setText(getString(R.string.plsVerify));
+                                        verifyEmailStep = true;
+                                    }
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     text.setText(R.string.invLogin);
@@ -91,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(p.length()>=6){
                     text.setText(R.string.invEmail);
                     if (e.endsWith("@usc.edu") & e.length()>8 & isValidEmail(e)) {
-                        text.setText("");
+                        text.setText(R.string.sendingEmail);
 
                         mAuth.createUserWithEmailAndPassword(e, p)
                                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -104,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
                                                                 Button button = findViewById(R.id.nextPageButton);
-                                                                button.setText(getString(R.string.EmailVerified));
+                                                                button.setText(getString(R.string.emailVerified));
                                                                 verifyEmailStep = true;
                                                                 text.setText(R.string.emailSent);
                                                                 TextView s = findViewById(R.id.toggleLoginButton);
@@ -112,8 +121,8 @@ public class LoginActivity extends AppCompatActivity {
                                                             }
                                                             else{
                                                                 //apparently it always works
-                                                                //text.setText(R.string.invEmail);
-                                                                //deleteUser();
+                                                                text.setText(R.string.invEmail);
+                                                                deleteUser();
                                                             }
                                                         }
                                                     });
@@ -128,13 +137,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         else{
-            mAuth.getCurrentUser().reload();
-            if(mAuth.getCurrentUser().isEmailVerified()){
-                goToCreateProfilePage();
-            }
-            else{
-                text.setText(R.string.emailNotVerified);
-            }
+            mAuth.getCurrentUser().reload().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        if(mAuth.getCurrentUser().isEmailVerified()){
+                            goToCreateProfilePage();
+                        }
+                        else{
+                            text.setText(R.string.emailNotVerified);
+                        }
+                    } else {
+                        // Handle the error
+                    }
+                }
+            });
         }
     }
 
@@ -160,12 +177,6 @@ public class LoginActivity extends AppCompatActivity {
         Intent mainPageIntent = new Intent(this, MeetingsActivity.class);
         mainPageIntent.putExtra("email", email.getText());
         startActivity(mainPageIntent);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        deleteUser();
     }
 
     public void deleteUser(){
