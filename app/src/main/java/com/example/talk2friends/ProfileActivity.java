@@ -60,28 +60,28 @@ public class ProfileActivity extends AppCompatActivity {
 
         //set name hint
         final TextView nametv = (TextView) findViewById(R.id.simpleEditText);
-        nametv.setText(name);
+        nametv.setHint(name);
 
         //set bday hint
         final TextView bdaytv = (TextView) findViewById(R.id.simpleEditText4);
-        bdaytv.setText(bday);
+        bdaytv.setHint(bday);
 
         //set aff hint
         final TextView afftv = (TextView) findViewById(R.id.simpleEditText5);
         if (aff)    {
-            bdaytv.setText("Student");
+            bdaytv.setHint("Student");
         }
         else    {
-            bdaytv.setText("Alumni");
+            bdaytv.setHint("Alumni");
         }
 
         //set prof hint
         final TextView proftv = (TextView) findViewById(R.id.simpleEditText6);
         if (prof)   {
-            bdaytv.setText("Native");
+            bdaytv.setHint("Native");
         }
         else    {
-            bdaytv.setText("International");
+            bdaytv.setHint("International");
         }
     }
 
@@ -100,12 +100,22 @@ public class ProfileActivity extends AppCompatActivity {
 
         simpleEditText = (EditText) findViewById(R.id.simpleEditText5);
         if (!simpleEditText.getText().toString().equals("")) {
-            aff = Boolean.parseBoolean(simpleEditText.getText().toString());
+            if(simpleEditText.getText().toString().equals("Student") || simpleEditText.getText().toString().equals("student"))    {
+                aff = true;
+            }
+            else    {
+                aff = false;
+            }
         }
 
         simpleEditText = (EditText) findViewById(R.id.simpleEditText6);
         if (!simpleEditText.getText().toString().equals("")) {
-            prof = Boolean.parseBoolean(simpleEditText.getText().toString());
+            if(simpleEditText.getText().toString().equals("Native") || simpleEditText.getText().toString().equals("native"))    {
+                prof = true;
+            }
+            else    {
+                prof = false;
+            }
         }
 
         myR.child("name").setValue(name);
@@ -115,6 +125,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         //maybe need intent here to reload if it doesn't automatically change the hint values after edit button is clicked
         //will test
+        Intent profilePageIntent = new Intent(this, ProfileActivity.class);
+        profilePageIntent.putExtra("email", email);
+        startActivity(profilePageIntent);
     }
 
     public void onClickProfilePage(View view) {
