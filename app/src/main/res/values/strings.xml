@@ -22,4 +22,16 @@
     <string name="plsVerify">Please Verify Email. Email sent.</string>
     <string name="emailNotVerified">Email not verified. Please try again in a few seconds.</string>
     <string name="loggingIn">Loggin In...</string>
+    <string name="createProfile">Create Profile</string>
+    <string name="name">Name</string>
+    <string name="bday">Birthday</string>
+    <string name="nativeSpeaker">Native Speaker</string>
+    <string name="ellSpeaker">English Learner</string>
+    <string name="student">Student</string>
+    <string name="alumni">Alumni</string>
+    <string name="interests">Interests:</string>
+    <string name="sports">Sports</string>
+    <string name="gaming">Gaming</string>
+    <string name="music">Music</string>
+    <string name="art">Art</string>
 </resources>

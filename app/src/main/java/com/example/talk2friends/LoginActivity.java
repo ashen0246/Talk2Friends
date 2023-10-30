@@ -17,6 +17,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -74,7 +79,28 @@ public class LoginActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     if (mAuth.getCurrentUser().isEmailVerified()) {
-                                        goToMeetingPage();
+                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                        DatabaseReference myRef = database.getReference();
+
+                                        myRef.child("users").child(email.getText().toString().substring(0, email.getText().toString().indexOf("@"))).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                if (dataSnapshot.exists()) {
+                                                    // User exists, go to meetings page
+                                                    goToMeetingPage();
+                                                } else {
+                                                    // User does not exist
+                                                    // Handle the case where the user is not found in the database
+                                                    goToCreateProfilePage();
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError error) {
+                                                // Failed to read value
+                                                System.out.println("Failed to read value. " + error);
+                                            }
+                                        });
                                     }
                                     else{
                                         //maybe need to send new link
