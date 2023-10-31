@@ -10,6 +10,10 @@ public class User {
     String bday;
     boolean isStudent;
     boolean isProficient;
+    boolean sports;
+    boolean gaming;
+    boolean music;
+    boolean art;
     ArrayList<String> friends;
     ArrayList<String> incomingFriendRequests;
 
@@ -26,6 +30,22 @@ public class User {
         this.isProficient = isProficient;
         this.friends = friends;
         this.incomingFriendRequests = incomingFriendRequests;
+    }
+
+    public User(String name, String bday, boolean isStudent, boolean isProficient,
+                boolean sports, boolean gaming, boolean music, boolean art) {
+        this.name = name;
+        this.bday = bday;
+        this.isStudent = isStudent;
+        this.isProficient = isProficient;
+        this.friends = new ArrayList<String>();
+        friends.add("test");
+        this.incomingFriendRequests = new ArrayList<String>();
+        incomingFriendRequests.add("test");
+        this.sports = sports;
+        this.gaming = gaming;
+        this.music = music;
+        this.art = art;
     }
 
     public User(String name, String bday, boolean isStudent, boolean isProficient) {
@@ -79,6 +99,14 @@ public class User {
         return friends;
     }
 
+    public void setFriends(ArrayList<String> friends) {
+        this.friends = friends;
+    }
+
+    public void setIncomingFriendRequests(ArrayList<String> incomingFriendRequests) {
+        this.incomingFriendRequests = incomingFriendRequests;
+    }
+
     public void acceptFriend(String email) {
     }
 
@@ -88,4 +116,38 @@ public class User {
 
     public void sendFriendRequest(String email) {
     }
+
+    public boolean isSports() {
+        return sports;
+    }
+
+    public void setSports(boolean sports) {
+        this.sports = sports;
+    }
+
+    public boolean isGaming() {
+        return gaming;
+    }
+
+    public void setGaming(boolean gaming) {
+        this.gaming = gaming;
+    }
+
+    public boolean isMusic() {
+        return music;
+    }
+
+    public void setMusic(boolean music) {
+        this.music = music;
+    }
+
+    public boolean isArt() {
+        return art;
+    }
+
+    public void setArt(boolean art) {
+        this.art = art;
+    }
+
+
 }
