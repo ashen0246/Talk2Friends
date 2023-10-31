@@ -195,13 +195,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void goToCreateProfilePage(){
         Intent emailVerificationIntent = new Intent(this, CreateProfileActivity.class);
-        emailVerificationIntent.putExtra("email", email.getText());
+        emailVerificationIntent.putExtra("email", email.getText().toString().substring(0, email.getText().toString().indexOf("@")));
         startActivity(emailVerificationIntent);
     }
     public void goToMeetingPage(){
         //if not in main database fo to create profile page
         Intent mainPageIntent = new Intent(this, MeetingsActivity.class);
-        mainPageIntent.putExtra("email", email.getText());
+        mainPageIntent.putExtra("email", email.getText().toString().substring(0, email.getText().toString().indexOf("@")));
         startActivity(mainPageIntent);
     }
 
