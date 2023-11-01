@@ -16,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class ProfileActivity extends AppCompatActivity {
     String email;
     String name;
@@ -30,25 +29,43 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
-        //No rotation of screen
+        // No rotation of the screen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         email = getIntent().getStringExtra("email");
 
-        //use email to update current values in hints on load
+        // Use email to update current values in hints on load
         String databaseUrl = "https://talk2friends-e1b4c-default-rtdb.firebaseio.com/";
 
         FirebaseDatabase database = FirebaseDatabase.getInstance(databaseUrl);
         myR = database.getReference("users");
 
-        myR.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+        myR.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    name = userSnapshot.child("name").getValue(String.class);
-                    bday = userSnapshot.child("bday").getValue(String.class);
-                    prof = userSnapshot.child("proficient").getValue(Boolean.class);
-                    aff = userSnapshot.child("student").getValue(Boolean.class);
+                if (dataSnapshot.exists()) {
+                    name = dataSnapshot.child("name").getValue(String.class);
+                    bday = dataSnapshot.child("bday").getValue(String.class);
+                    prof = dataSnapshot.child("proficient").getValue(Boolean.class);
+                    aff = dataSnapshot.child("student").getValue(Boolean.class);
+
+                    // Set name hint
+                    EditText nametv = (EditText) findViewById(R.id.simpleEditText);
+                    nametv.setHint(name);
+
+                    // Set bday hint
+                    EditText bdaytv = (EditText) findViewById(R.id.simpleEditText4);
+                    bdaytv.setHint(bday);
+
+                    // Set aff hint
+                    EditText afftv = (EditText) findViewById(R.id.simpleEditText5);
+                    afftv.setHint(aff ? "Student" : "Alumni");
+
+                    // Set prof hint
+                    EditText proftv = (EditText) findViewById(R.id.simpleEditText6);
+                    proftv.setHint(prof ? "Native" : "International");
+                } else {
+                    System.err.println("User not found in the database.");
                 }
             }
 
@@ -57,77 +74,61 @@ public class ProfileActivity extends AppCompatActivity {
                 System.err.println("Database Error: " + databaseError.getMessage());
             }
         });
-
-        //set name hint
-        final TextView nametv = (TextView) findViewById(R.id.simpleEditText);
-        nametv.setHint(name);
-
-        //set bday hint
-        final TextView bdaytv = (TextView) findViewById(R.id.simpleEditText4);
-        bdaytv.setHint(bday);
-
-        //set aff hint
-        final TextView afftv = (TextView) findViewById(R.id.simpleEditText5);
-        if (aff)    {
-            bdaytv.setHint("Student");
-        }
-        else    {
-            bdaytv.setHint("Alumni");
-        }
-
-        //set prof hint
-        final TextView proftv = (TextView) findViewById(R.id.simpleEditText6);
-        if (prof)   {
-            bdaytv.setHint("Native");
-        }
-        else    {
-            bdaytv.setHint("International");
-        }
     }
 
-    //when you click the edit button, take all the values entered in each edittext and push them to firebase
-    //don't forget to reload the profile page after, probably using an intent
+    // ...
+
+    // When you click the edit button, take all the values entered in each edit text and push them to Firebase
     public void onClickEditButton(View view) {
         EditText simpleEditText = (EditText) findViewById(R.id.simpleEditText);
-        if (!simpleEditText.getText().toString().equals(""))  {
+        if (!simpleEditText.getText().toString().isEmpty()) {
             name = simpleEditText.getText().toString();
         }
 
         simpleEditText = (EditText) findViewById(R.id.simpleEditText4);
-        if (!simpleEditText.getText().toString().equals("")) {
+        if (!simpleEditText.getText().toString().isEmpty()) {
             bday = simpleEditText.getText().toString();
         }
 
         simpleEditText = (EditText) findViewById(R.id.simpleEditText5);
-        if (!simpleEditText.getText().toString().equals("")) {
-            if(simpleEditText.getText().toString().equals("Student") || simpleEditText.getText().toString().equals("student"))    {
+        if (!simpleEditText.getText().toString().isEmpty()) {
+            String affText = simpleEditText.getText().toString().toLowerCase();
+            if (affText.equals("student")) {
                 aff = true;
-            }
-            else    {
+            } else {
                 aff = false;
             }
         }
 
         simpleEditText = (EditText) findViewById(R.id.simpleEditText6);
-        if (!simpleEditText.getText().toString().equals("")) {
-            if(simpleEditText.getText().toString().equals("Native") || simpleEditText.getText().toString().equals("native"))    {
+        if (!simpleEditText.getText().toString().isEmpty()) {
+            String profText = simpleEditText.getText().toString().toLowerCase();
+            if (profText.equals("native")) {
                 prof = true;
-            }
-            else    {
+            } else {
                 prof = false;
             }
         }
 
-        myR.child("name").setValue(name);
-        myR.child("birthday").setValue(bday);
-        myR.child("proficient").setValue(prof);
-        myR.child("student").setValue(aff);
+        // Update the hints directly with the new values
+        EditText nametv = (EditText) findViewById(R.id.simpleEditText);
+        nametv.setHint(name);
 
-        //maybe need intent here to reload if it doesn't automatically change the hint values after edit button is clicked
-        //will test
-        Intent profilePageIntent = new Intent(this, ProfileActivity.class);
-        profilePageIntent.putExtra("email", email);
-        startActivity(profilePageIntent);
+        EditText bdaytv = (EditText) findViewById(R.id.simpleEditText4);
+        bdaytv.setHint(bday);
+
+        EditText afftv = (EditText) findViewById(R.id.simpleEditText5);
+        afftv.setHint(aff ? "Student" : "Alumni");
+
+        EditText proftv = (EditText) findViewById(R.id.simpleEditText6);
+        proftv.setHint(prof ? "Native" : "International");
+
+        // Push the updated values to Firebase
+        myR.child(email).child("name").setValue(name);
+        myR.child(email).child("bday").setValue(bday);
+        myR.child(email).child("proficient").setValue(prof);
+        myR.child(email).child("student").setValue(aff);
+
     }
 
     public void onClickProfilePage(View view) {
