@@ -34,7 +34,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         email = getIntent().getStringExtra("email");
 
-        // Use email to update current values in hints on load
         String databaseUrl = "https://talk2friends-e1b4c-default-rtdb.firebaseio.com/";
 
         FirebaseDatabase database = FirebaseDatabase.getInstance(databaseUrl);
@@ -128,16 +127,15 @@ public class ProfileActivity extends AppCompatActivity {
         myR.child(email).child("bday").setValue(bday);
         myR.child(email).child("proficient").setValue(prof);
         myR.child(email).child("student").setValue(aff);
-
     }
 
     public void onClickProfilePage(View view) {
         //skip
     }
     public void onClickMeetingsPage(View view) {
-        Intent meetingsPageIntent = new Intent(this, MeetingsActivity.class);
-        meetingsPageIntent.putExtra("email", email);
-        startActivity(meetingsPageIntent);
+            Intent meetingsPageIntent = new Intent(this, MeetingsActivity.class);
+            meetingsPageIntent.putExtra("email", email);
+            startActivity(meetingsPageIntent);
     }
 
     public void onClickFriendsPage(View view) {

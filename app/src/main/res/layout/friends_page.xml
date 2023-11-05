@@ -16,7 +16,92 @@
         app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.112" />
+
+    <TextView
+        android:id="@+id/friendsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friends"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/meetingPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.167" />
+
+    <TextView
+        android:id="@+id/requestsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friend Requests"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/meetingPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.161"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.457" />
+
+    <TextView
+        android:id="@+id/recommendLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended Friends"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/meetingPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.187"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.667" />
+
+    <TextView
+        android:id="@+id/inviteLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invite Friend:"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/meetingPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.913" />
+
+    <TableLayout
+        android:id="@+id/friendsTable"
+        app:layout_constraintTop_toBottomOf="@+id/friendsLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_width="300dp"
+        android:layout_height="150dp"
+        android:stretchColumns="*"
+        android:gravity="top" />
+
+    <TableLayout
+        android:id="@+id/requestsTable"
+        app:layout_constraintTop_toBottomOf="@+id/requestsLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:stretchColumns="*"
+        android:gravity="top" />
+
+    <TableLayout
+        android:id="@+id/recTable"
+        app:layout_constraintTop_toBottomOf="@+id/recommendLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="50dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:stretchColumns="*"
+        android:gravity="top" />
 
     <Button
         android:id="@+id/profilePageButton"
@@ -24,27 +109,25 @@
         android:layout_height="wrap_content"
         android:onClick="onClickProfilePage"
         android:text="@string/profile_page_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/meetingPageButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pageLabel"
+        app:layout_constraintEnd_toStartOf="@id/meetingPageButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pageLabel"
+        app:layout_constraintVertical_bias="0.919" />
 
     <Button
         android:id="@+id/meetingPageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
         android:onClick="onClickMeetingsPage"
         android:text="@string/meetings_page_button"
-        app:layout_constraintStart_toEndOf="@id/profilePageButton"
-        app:layout_constraintEnd_toStartOf="@id/friendsPageButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pageLabel"
+        app:layout_constraintEnd_toStartOf="@id/friendsPageButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5"
-        />
+
+        app:layout_constraintStart_toEndOf="@id/profilePageButton" />
 
     <Button
         android:id="@+id/friendsPageButton"
@@ -52,12 +135,11 @@
         android:layout_height="wrap_content"
         android:onClick="onClickFriendsPage"
         android:text="@string/friends_page_button"
-        app:layout_constraintStart_toEndOf="@id/meetingPageButton"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pageLabel"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5"
-        />
+        app:layout_constraintStart_toEndOf="@id/meetingPageButton"
+        app:layout_constraintTop_toBottomOf="@id/pageLabel"
+        app:layout_constraintVertical_bias="0.919" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
