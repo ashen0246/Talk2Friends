@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/meetingTopic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Topic: XXX"/>
+
+    <TextView
+        android:id="@+id/meetingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time: XXX"/>
+
+    <TextView
+        android:id="@+id/meetingLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location/Zoom: XXX"/>
+    <Button
+        android:id="@+id/joinButton"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:text="Join"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/attendingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attending: "
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>
+
