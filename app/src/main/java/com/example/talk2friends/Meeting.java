@@ -7,7 +7,6 @@ public class Meeting {
     String topic;
     String location;
     String time;
-    boolean isAttending;
     ArrayList<String> attendants;
 
     // No-argument constructor required for Firebase
@@ -15,12 +14,11 @@ public class Meeting {
         // Default constructor required for calls to DataSnapshot.getValue(Meeting.class)
     }
 
-    public Meeting(String meetingID, String topic, String location, String time, boolean isAttending, ArrayList<String> attendants){
+    public Meeting(String meetingID, String topic, String location, String time, ArrayList<String> attendants){
         this.meetingID = meetingID;
         this.topic = topic;
         this.location = location;
         this.time = time;
-        this.isAttending = isAttending;
         this.attendants = attendants;
     }
 
@@ -42,10 +40,6 @@ public class Meeting {
 
     public void setMeetingID(String id) {
         this.meetingID = id;
-    }
-
-    public boolean isAttending() {
-        return isAttending;
     }
 
     public ArrayList<String> getAttendants() {

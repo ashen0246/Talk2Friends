@@ -50,14 +50,13 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
         if (!topic.isEmpty() && !time.isEmpty() && !locationZoom.isEmpty()) {
             String id = databaseMeetings.push().getKey();
-            boolean isAttending = true;
             ArrayList<String> attendants = new ArrayList<>();
             // Add the current user's email to the list of attendants
             //String email = mAuth.getCurrentUser().getEmail();
             String email = getIntent().getStringExtra("email");
             attendants.add(email);
 
-            Meeting meeting = new Meeting(id, topic, locationZoom, time, isAttending, attendants);
+            Meeting meeting = new Meeting(id, topic, locationZoom, time, attendants);
             databaseMeetings.child(id).setValue(meeting);
 
             // Clear the input
