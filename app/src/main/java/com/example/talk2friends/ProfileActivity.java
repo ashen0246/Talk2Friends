@@ -35,3 +35,4 @@ public class ProfileActivity extends AppCompatActivity {
     }
 }
 //InformationPopup
+
