@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
-        // No rotation of the screen
+        //no rotation of the screen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         email = getIntent().getStringExtra("email");
@@ -48,19 +48,15 @@ public class ProfileActivity extends AppCompatActivity {
                     prof = dataSnapshot.child("proficient").getValue(Boolean.class);
                     aff = dataSnapshot.child("student").getValue(Boolean.class);
 
-                    // Set name hint
                     EditText nametv = (EditText) findViewById(R.id.simpleEditText);
                     nametv.setHint(name);
 
-                    // Set bday hint
                     EditText bdaytv = (EditText) findViewById(R.id.simpleEditText4);
                     bdaytv.setHint(bday);
 
-                    // Set aff hint
                     EditText afftv = (EditText) findViewById(R.id.simpleEditText5);
                     afftv.setHint(aff ? "Student" : "Alumni");
 
-                    // Set prof hint
                     EditText proftv = (EditText) findViewById(R.id.simpleEditText6);
                     proftv.setHint(prof ? "Native" : "International");
                 } else {
@@ -75,9 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    // ...
-
-    // When you click the edit button, take all the values entered in each edit text and push them to Firebase
     public void onClickEditButton(View view) {
         EditText simpleEditText = (EditText) findViewById(R.id.simpleEditText);
         if (!simpleEditText.getText().toString().isEmpty()) {
@@ -109,7 +102,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
 
-        // Update the hints directly with the new values
         EditText nametv = (EditText) findViewById(R.id.simpleEditText);
         nametv.setHint(name);
 
@@ -122,7 +114,6 @@ public class ProfileActivity extends AppCompatActivity {
         EditText proftv = (EditText) findViewById(R.id.simpleEditText6);
         proftv.setHint(prof ? "Native" : "International");
 
-        // Push the updated values to Firebase
         myR.child(email).child("name").setValue(name);
         myR.child(email).child("bday").setValue(bday);
         myR.child(email).child("proficient").setValue(prof);

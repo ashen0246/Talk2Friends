@@ -2,12 +2,15 @@ package com.example.talk2friends;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -19,8 +22,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.net.Authenticator;
+import java.net.PasswordAuthentication;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.Vector;
+import java.util.regex.Pattern;
+
+import java.io.IOException;
 
 public class FriendsActivity extends AppCompatActivity {
     String email;
@@ -36,7 +45,7 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friends_page);
-        //No rotation of screen
+        //no rotation of screen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         email = getIntent().getStringExtra("email");
@@ -95,11 +104,9 @@ public class FriendsActivity extends AppCompatActivity {
                             }
                         });
 
-                        // Add the TextView and Button to the row
                         row.addView(nameTextView);
                         row.addView(removeButton);
 
-                        // Add the row to the friendsTable
                         t1.addView(row);
                     }
                 }
@@ -107,7 +114,6 @@ public class FriendsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle any database errors here
             }
         });
     }
@@ -166,12 +172,10 @@ public class FriendsActivity extends AppCompatActivity {
                             }
                         });
 
-                        // Add the TextView and Button to the row
                         row.addView(nameTextView);
                         row.addView(acceptButton);
                         row.addView(removeButton);
 
-                        // Add the row to the friendsTable
                         t2.addView(row);
                     }
                 }
@@ -179,7 +183,6 @@ public class FriendsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle any database errors here
             }
         });
     }
@@ -221,7 +224,11 @@ public class FriendsActivity extends AppCompatActivity {
                             common++;
                         }
 
-                        if (common >= 2 && !requestSent.contains(dS.getKey())) {
+
+                        if (dS.child("incomingFriendRequests").hasChild(email)) {
+                            //do nothing
+                        }
+                        else if (common >= 2 && !requestSent.contains(dS.getKey())) {
                             TableRow row = new TableRow(getApplicationContext());
 
                             TextView nameTextView = new TextView(getApplicationContext());
@@ -242,11 +249,9 @@ public class FriendsActivity extends AppCompatActivity {
                                 }
                             });
 
-                            // Add the TextView and Button to the row
                             row.addView(nameTextView);
                             row.addView(removeButton);
 
-                            // Add the row to the friendsTable
                             t3.addView(row);
                             requestSent.add(dS.getKey());
                         }
@@ -257,9 +262,48 @@ public class FriendsActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                // Handle any database errors here
             }
         });
+    }
+
+    public void onClickInviteButton(View view) throws IOException {
+        EditText inviteEmail = (EditText) findViewById(R.id.inviteFriendEmail);
+        String ie = inviteEmail.getText().toString();
+        if (ie.endsWith("@usc.edu") & ie.length()>8 & isValidEmail(ie)) {
+            inviteEmail.setText("");
+
+            String[] emailAddresses = {ie};
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Join Talk2Friends!");
+            intent.putExtra(Intent.EXTRA_TEXT, "Your friend has invited you to join Talk2Friends! Download and join now!");
+
+            if (intent.resolveActivity(this.getPackageManager()) != null) {
+                this.startActivity(Intent.createChooser(intent, "Send email"));
+            }
+
+            inviteEmail.setHint("Enter USC Email");
+            inviteEmail.setHintTextColor(Color.GRAY);
+        }
+        else    {
+            inviteEmail.setText("");
+            inviteEmail.setHint("Email Invalid.");
+            inviteEmail.setHintTextColor(Color.RED);
+        }
+    }
+
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
     }
 
     public void onClickProfilePage(View view) {
