@@ -2,7 +2,7 @@
 
 Hello and welcome to Talk2Friends!
 
-To run this app, we used a Pixel 2 API 24 Nougat 7.0.
+To run this app, we used a Pixel 2 API 24 Nougat 7.0. Android Studio Chipmunk.
 
 To begin testing of Talk2Friends, please run the application on an emulator with the settings above.
 The opening page defaults to login. If you'd like to use an existing account, please type in the email "alshen@usc.edu" and the password "123123" and click continue at the bottom of the page.
