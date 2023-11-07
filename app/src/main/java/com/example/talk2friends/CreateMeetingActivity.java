@@ -39,16 +39,6 @@ public class CreateMeetingActivity extends AppCompatActivity {
         locationZoomEditText = findViewById(R.id.locationZoomEditText);
         createButton = findViewById(R.id.createButton);
         errorMessageTextView = findViewById(R.id.errorMessage); // Initialize error message text view
-
-        /*
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickCreateMeeting(v);
-            }
-        });
-
-         */
     }
 
     public void onClickCreateMeeting(View v) {
@@ -63,7 +53,8 @@ public class CreateMeetingActivity extends AppCompatActivity {
             boolean isAttending = true;
             ArrayList<String> attendants = new ArrayList<>();
             // Add the current user's email to the list of attendants
-            String email = mAuth.getCurrentUser().getEmail();
+            //String email = mAuth.getCurrentUser().getEmail();
+            String email = getIntent().getStringExtra("email");
             attendants.add(email);
 
             Meeting meeting = new Meeting(id, topic, locationZoom, time, isAttending, attendants);

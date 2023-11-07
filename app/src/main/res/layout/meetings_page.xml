@@ -32,7 +32,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <!-- Meeting views will be added here programmatically -->
         </LinearLayout>
     </ScrollView>
 
