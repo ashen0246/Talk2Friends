@@ -10,6 +10,10 @@
     <string name="friends_page_button">Friends</string>
     <string name="profile_page_button">Profile</string>
     <string name="meetings_page_button">Meetings</string>
+    <string name="current_name">Andy</string>
+    <string name="current_bday">January</string>
+    <string name="current_aff">Alumni</string>
+    <string name="current_prof">International</string>
     <string name="inputEmail">USC Email</string>
     <string name="inputPwd">Password</string>
     <string name="cancel">Cancel</string>
