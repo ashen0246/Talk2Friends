@@ -7,15 +7,18 @@ public class Meeting {
     String topic;
     String location;
     String time;
-    boolean isAttending;
     ArrayList<String> attendants;
 
-    public Meeting(String meetingID, String topic, String location, String time, boolean isAttending, ArrayList<String> attendants){
+    // No-argument constructor required for Firebase
+    public Meeting() {
+        // Default constructor required for calls to DataSnapshot.getValue(Meeting.class)
+    }
+
+    public Meeting(String meetingID, String topic, String location, String time, ArrayList<String> attendants){
         this.meetingID = meetingID;
         this.topic = topic;
         this.location = location;
         this.time = time;
-        this.isAttending = isAttending;
         this.attendants = attendants;
     }
 
@@ -31,11 +34,35 @@ public class Meeting {
         return time;
     }
 
-    public boolean isAttending() {
-        return isAttending;
+    public String getMeetingID() {
+        return meetingID;
+    }
+
+    public void setMeetingID(String id) {
+        this.meetingID = id;
     }
 
     public ArrayList<String> getAttendants() {
-        return attendants;
+        if (this.attendants == null) {
+            this.attendants = new ArrayList<>();
+        }
+        return this.attendants;
     }
+
+
+    public void addAttendant(String email) {
+        if (this.attendants == null) {
+            this.attendants = new ArrayList<>();
+        }
+        if (!this.attendants.contains(email)) {
+            this.attendants.add(email);
+        }
+    }
+
+    public void removeAttendant(String userEmail) {
+        if (this.attendants != null) {
+            this.attendants.remove(userEmail);
+        }
+    }
+
 }

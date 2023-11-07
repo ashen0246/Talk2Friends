@@ -129,6 +129,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                 myRef.child("users").child(email).setValue(user);
 
                 Intent mainPageIntent = new Intent(this, MeetingsActivity.class);
+                mainPageIntent.putExtra("email", email);
                 startActivity(mainPageIntent);
             }
         }
