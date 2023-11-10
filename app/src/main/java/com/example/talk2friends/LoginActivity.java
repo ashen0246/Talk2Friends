@@ -126,38 +126,39 @@ public class LoginActivity extends AppCompatActivity {
                 if(p.length()>=6){
                     text.setText(R.string.invEmail);
                     if (e.endsWith("@usc.edu") & e.length()>8 & isValidEmail(e)) {
-                        text.setText(R.string.sendingEmail);
-
-                        mAuth.createUserWithEmailAndPassword(e, p)
-                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            mAuth.getCurrentUser().sendEmailVerification()
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Button button = findViewById(R.id.nextPageButton);
-                                                                button.setText(getString(R.string.emailVerified));
-                                                                verifyEmailStep = true;
-                                                                text.setText(R.string.emailSent);
-                                                                TextView s = findViewById(R.id.toggleLoginButton);
-                                                                s.setText(R.string.cancel);
+                        text.setText("Please use USC email without dot.");
+                        if (!e.substring(0, e.indexOf("@")).contains(".")) {
+                            text.setText(R.string.sendingEmail);
+                            mAuth.createUserWithEmailAndPassword(e, p)
+                                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                mAuth.getCurrentUser().sendEmailVerification()
+                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    Button button = findViewById(R.id.nextPageButton);
+                                                                    button.setText(getString(R.string.emailVerified));
+                                                                    verifyEmailStep = true;
+                                                                    text.setText(R.string.emailSent);
+                                                                    TextView s = findViewById(R.id.toggleLoginButton);
+                                                                    s.setText(R.string.cancel);
+                                                                } else {
+                                                                    //apparently it always works
+                                                                    text.setText(R.string.invEmail);
+                                                                    deleteUser();
+                                                                }
                                                             }
-                                                            else{
-                                                                //apparently it always works
-                                                                text.setText(R.string.invEmail);
-                                                                deleteUser();
-                                                            }
-                                                        }
-                                                    });
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            text.setText(R.string.invNewAccount);
+                                                        });
+                                            } else {
+                                                // If sign in fails, display a message to the user.
+                                                text.setText(R.string.invNewAccount);
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                        }
                     }
                 }
             }
