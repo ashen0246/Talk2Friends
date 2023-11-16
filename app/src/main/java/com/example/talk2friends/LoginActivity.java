@@ -72,50 +72,54 @@ public class LoginActivity extends AppCompatActivity {
         if (!verifyEmailStep) {
             if (login) {
                 //login
-                text.setText(R.string.loggingIn);
-                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    if (mAuth.getCurrentUser().isEmailVerified()) {
-                                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                                        DatabaseReference myRef = database.getReference();
+                if (!email.getText().toString().isEmpty() && !password.getText().toString().isEmpty()) {
+                    text.setText(R.string.loggingIn);
+                    mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        if (mAuth.getCurrentUser().isEmailVerified()) {
+                                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                            DatabaseReference myRef = database.getReference();
 
-                                        myRef.child("users").child(email.getText().toString().substring(0, email.getText().toString().indexOf("@"))).addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                                if (dataSnapshot.exists()) {
-                                                    // User exists, go to meetings page
-                                                    goToMeetingPage();
-                                                } else {
-                                                    // User does not exist
-                                                    // Handle the case where the user is not found in the database
-                                                    goToCreateProfilePage();
+                                            myRef.child("users").child(email.getText().toString().substring(0, email.getText().toString().indexOf("@"))).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.exists()) {
+                                                        // User exists, go to meetings page
+                                                        goToMeetingPage();
+                                                    } else {
+                                                        // User does not exist
+                                                        // Handle the case where the user is not found in the database
+                                                        goToCreateProfilePage();
+                                                    }
                                                 }
-                                            }
 
-                                            @Override
-                                            public void onCancelled(DatabaseError error) {
-                                                // Failed to read value
-                                                System.out.println("Failed to read value. " + error);
-                                            }
-                                        });
+                                                @Override
+                                                public void onCancelled(DatabaseError error) {
+                                                    // Failed to read value
+                                                    System.out.println("Failed to read value. " + error);
+                                                }
+                                            });
+                                        } else {
+                                            //maybe need to send new link
+                                            Button button = findViewById(R.id.nextPageButton);
+                                            button.setText(getString(R.string.emailVerified));
+                                            TextView text = findViewById(R.id.errorMessage);
+                                            text.setText(getString(R.string.plsVerify));
+                                            verifyEmailStep = true;
+                                        }
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        text.setText(R.string.invLogin);
                                     }
-                                    else{
-                                        //maybe need to send new link
-                                        Button button = findViewById(R.id.nextPageButton);
-                                        button.setText(getString(R.string.emailVerified));
-                                        TextView text = findViewById(R.id.errorMessage);
-                                        text.setText(getString(R.string.plsVerify));
-                                        verifyEmailStep = true;
-                                    }
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    text.setText(R.string.invLogin);
                                 }
-                            }
-                        });
+                            });
+                }
+                else{
+                    text.setText("Please Fill in All Fields");
+                }
             } else {
                 //signup
 
