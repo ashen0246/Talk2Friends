@@ -17,8 +17,6 @@ public class User {
     ArrayList<String> friends;
     ArrayList<String> incomingFriendRequests;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference();
 
     public User(){
     }
@@ -108,13 +106,12 @@ public class User {
     }
 
     public void acceptFriend(String email) {
+        friends.add(email);
+        incomingFriendRequests.remove(email);
     }
 
     public ArrayList<String> getIncomingFriendRequests() {
         return incomingFriendRequests;
-    }
-
-    public void sendFriendRequest(String email) {
     }
 
     public boolean isSports() {
