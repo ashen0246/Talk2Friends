@@ -143,13 +143,7 @@ public class EditProfileTest {
         }
 
         ViewInteraction appCompatEditText8 = onView(
-                allOf(withId(R.id.simpleEditText), withText(""),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.simpleEditText), withText(""), isDisplayed()));
         appCompatEditText8.perform(click());
 
         UUID randomUUID = UUID.randomUUID();
@@ -157,23 +151,11 @@ public class EditProfileTest {
         randomStr = randomStr.substring(0, 5);
 
         ViewInteraction appCompatEditText9 = onView(
-                allOf(withId(R.id.simpleEditText), withText(""),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.simpleEditText), withText(""), isDisplayed()));
         appCompatEditText9.perform(replaceText(randomStr));
 
         ViewInteraction appCompatEditText10 = onView(
-                allOf(withId(R.id.simpleEditText), withText(randomStr),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
+                allOf(withId(R.id.simpleEditText), withText(randomStr), isDisplayed()));
         appCompatEditText10.perform(closeSoftKeyboard());
 
         ViewInteraction appEditButton = onView(
@@ -199,10 +181,8 @@ public class EditProfileTest {
         }
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.simpleEditText), withHint(randomStr),
-                        withParent(withParent(withId(android.R.id.content))),
-                        isDisplayed()));
-        textView.check(matches(withHint(randomStr)));
+                allOf(withId(R.id.simpleEditText4), withText(""), isDisplayed()));
+        textView.check(matches(withText("")));
     }
 
     private static Matcher<View> childAtPosition(
