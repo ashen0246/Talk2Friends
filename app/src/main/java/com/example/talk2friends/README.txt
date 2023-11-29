@@ -11,7 +11,9 @@ Enter your interests below by clicking whichever ones you're interested in. Clic
 The main page is the meetings page. This lists all meetings that have been currently created, and you can scroll down if there are many meetings happening soon. You can click join to join meetings, and leave to leave meetings you're currently in.
 Click create on the top right to make a new meeting. Fill out the info and hit create again to make one!
 
-Using the buttons on the bottom of the screen, navigate to the profile page. There, you can edit any of the info you put in when making your account. If you want to change your name, type in a new name and hit edit. If you navigate back to the profile page, you'll see that the new name will appear! On the bottom half of the profile page, you can find the contact support zone! Since this app is still in development, if you have any issues please type them in the box and click send to notify us so we can fix the bugs as fast as possible. 
+Using the buttons on the bottom of the screen, navigate to the profile page. There, you can edit any of the info you put in when making your account. If you want to change your name, type in a new name and hit edit. If you navigate back to the profile page, you'll see that the new name will appear! 
+
+** SPRINT ADDITION: On the bottom half of the profile page, you can find the contact support zone! Since this app is still in development, if you have any issues please type them in the box and click send to notify us so we can fix the bugs as fast as possible. **
 
 Finally, you can navigate to the friends page. Here all your current friends will be displayed near the top, allowing you to remove them if you want.
 Next is your friend requests, which you can accept or deny.
