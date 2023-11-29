@@ -17,7 +17,19 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.278" />
+        app:layout_constraintVertical_bias="0.319" />
+
+    <TextView
+        android:id="@+id/supportLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Support"
+        app:layout_constraintBottom_toTopOf="@+id/meetingPageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.759" />
 
     <EditText
         android:id="@+id/simpleEditText"
@@ -72,19 +84,50 @@
         app:layout_constraintTop_toBottomOf="@+id/simpleEditText5"
         android:onClick="onClickEditButton" />
 
+    <EditText
+        android:id="@+id/simpleEditText7"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="331dp"
+        android:gravity="start|top"
+        android:hint="Please Describe Your Issue"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/supportLabel"
+        app:layout_constraintVertical_bias="0.004" />
+
     <Button
         android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="221dp"
-        android:onClick="onClickEditButton"
+        android:onClick="onClickMeetingsPage"
         android:text="Edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/friendsPageButton"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toEndOf="@id/profilePageButton"
         app:layout_constraintTop_toBottomOf="@+id/simpleEditText"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintVertical_bias="0.69" />
+
+    <Button
+        android:id="@+id/sendSupport"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="221dp"
+        android:onClick="onClickSendButton"
+        android:text="Send"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/friendsPageButton"
+        app:layout_constraintTop_toBottomOf="@+id/supportLabel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/profilePageButton"
@@ -98,7 +141,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pageLabel"
-        app:layout_constraintVertical_bias="0.966" />
+        app:layout_constraintVertical_bias="0.967" />
 
     <Button
         android:id="@+id/meetingPageButton"
@@ -119,6 +162,7 @@
         android:onClick="onClickFriendsPage"
         android:text="@string/friends_page_button"
         android:layout_marginRight="70dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

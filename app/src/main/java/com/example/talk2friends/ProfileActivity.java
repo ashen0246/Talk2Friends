@@ -2,6 +2,7 @@ package com.example.talk2friends;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
-        //no rotation of the screen
+//no rotation of the screen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 
         email = getIntent().getStringExtra("email");
@@ -120,13 +121,42 @@ public class ProfileActivity extends AppCompatActivity {
         myR.child(email).child("student").setValue(aff);
     }
 
+    public void onClickSendButton(View view) {
+        EditText body = (EditText) findViewById(R.id.simpleEditText7);
+        String bodyText = body.getText().toString();
+
+        if (!bodyText.isEmpty()) {
+            body.setText("");
+
+            String[] emailAddresses = {"coenpira@usc.edu"};
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, emailAddresses);
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Talk2Friends Support Ticket");
+            intent.putExtra(Intent.EXTRA_TEXT, bodyText);
+
+            if (intent.resolveActivity(this.getPackageManager()) != null) {
+                this.startActivity(Intent.createChooser(intent, "Send email"));
+            }
+
+            body.setHint("Please Describe Your Issue");
+            body.setHintTextColor(Color.GRAY);
+        }
+        else {
+            body.setText("");
+            body.setHint("Please Input a Message.");
+            body.setHintTextColor(Color.RED);
+        }
+    }
+
     public void onClickProfilePage(View view) {
-        //skip
+//skip
     }
     public void onClickMeetingsPage(View view) {
-            Intent meetingsPageIntent = new Intent(this, MeetingsActivity.class);
-            meetingsPageIntent.putExtra("email", email);
-            startActivity(meetingsPageIntent);
+        Intent meetingsPageIntent = new Intent(this, MeetingsActivity.class);
+        meetingsPageIntent.putExtra("email", email);
+        startActivity(meetingsPageIntent);
     }
 
     public void onClickFriendsPage(View view) {
@@ -136,4 +166,3 @@ public class ProfileActivity extends AppCompatActivity {
     }
 }
 //InformationPopup
-
